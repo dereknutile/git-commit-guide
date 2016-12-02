@@ -15,25 +15,27 @@ To summarize, good Git commit messages do the following:
 Git commit messages have two main parts - the **subject**, which is required, and an optional **description**.  The [Git manual](https://www.kernel.org/pub/software/scm/git/docs/git-commit.html#_discussion) states:  *Though not required, it’s a good idea to begin the commit message with a single short (less than 50 character) line summarizing the change, followed by a blank line and then a more thorough description.*
 
 ### Git Commit Subject
-So, like the Git manual suggests, we should keep our subjects to ~50 characters or less.  In addition, we should strive to add a few minor attributes to each message so on quick glance, our reviewer can assess the true nature of the commit.  To do this, we follow a Git commit message convention of:
+So, like the Git manual suggests, we should keep our subjects to ~50 characters or less.  In addition, we should strive to add a few minor attributes to each message so at a quick glance, our reviewer can assess the true nature of the commit or visually be able to filter out commit types.  To do this, we follow a Git commit message convention of:
 
-    {category}/{area} - {message}
+    {action}/{feature} {message}
 
-##### Category Convention
-The {category} portion of the message should fall under one of the following types:
+##### Action Convention
+The {action} portion of the message should fall under one of the following types:
 
-  * `new` Representing the addition of something new to the repository.
-  * `edit` Is a refactor of something that previously existed in the repository.  And edit could include code changes or a file deletion for example.
-  * `fix` Is a specific type of edit or refactor where a specific bug fix has been introduced.
+  * `n` - New: Representing the addition of something new to the repository.
+  * `e` - Edit: Is a refactor of something that previously existed in the repository.  An edit could include code changes or a file deletion for example.
+  * `r` - Remove: Calls out that a file or feature was removed from the repository.
+  * `f` - Fix: Is a specific type of edit or refactor where a specific bug fix has been introduced.
 
-##### Area Convention
-The {area} portion of the message is required, but allows for more freeform.  The convention for the {area} is to use a single word in singular form like `test` rather than `tests`, and shortened if it has common usage like `doc` or `config`.  Here are some common areas:
+##### Feature Convention
+The {feature} portion of the message is required, but allows for more freeform.  The convention for the {feature} is to use a single word in singular form (think `test` not`tests`), and shortened if it has common usage like `auth` or `config`.  Here are some common features:
 
-  * `{feature}` is a specific function or attribute of the project like `login`, `blog`, or `api`.
+  * `auth`, `cart`, `doc`, and `api` all briefly describe a feature or element.  The key here is to use a short, singular word that describes the area of development.
   * `style` could be a generic tag for css, scss, sass, etc.
   * `format` when manipulating document format like changing tabs to spaces.
-  * `doc` is used for documentation, readme, commenting, or instructions.
-  * `test` is test code.
+  * `*` for work that can't fall into a category.
+
+Some teams will come up with their own conventions for the area.  Short is better as long as it's easy to understand.
 
 ##### Message Convention
 To write great Git commit messages, follow the following rules:
@@ -48,20 +50,22 @@ To write great Git commit messages, follow the following rules:
 
 #### Examples of Well Formed Git Commit subjects
 
-    new/doc - Create standard README.md file
-    edit/doc - Add conventions section to README.md
-    new/feature - Setup gulp, bower, and sass
-    edit/config - Change bower asset directory
-    new/style - Setup and generate css from sass
+    n/doc - Create standard README.md file
+    e/doc - Add conventions section to README.md
+    n/feature - Setup gulp, bower, and sass
+    f/js - Fix missing brace in blah.js
+    e/cfg - Change bower asset directory config
+    n/style - Setup and generate css from sass
 
 ... which looks like this in the Git log ...
 
     $ git log --oneline
-    e1071be new/style - Setup and generate css from sass
-    c2da944 edit/config - Change bower asset directory
-    379623f new/feature - Setup gulp, bower, and sass
-    5319fa3 edit/doc - Add conventions section to README.md
-    65ae684 new/doc - Create standard README.md file
+    e1071be n/doc - Create standard README.md file
+    c2da944 e/doc - Add conventions section to README.md
+    379623f n/feature - Setup gulp, bower, and sass
+    488e30f f/js - Fix missing brace in blah.js
+    5319fa3 e/cfg - Change bower asset directory config
+    65ae684 n/style - Setup and generate css from sass
 
 ### Git Commit Description
 The Git commit description expands the detail of the subject.  Try to adhere to the following rules:
